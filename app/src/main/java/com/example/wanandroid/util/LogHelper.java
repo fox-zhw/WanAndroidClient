@@ -10,25 +10,25 @@ import timber.log.Timber;
  * @author 52512
  * @date 2020/12/15
  */
-public class LogUtils {
+public class LogHelper {
 	
 	public static void init() {
 		Timber.plant(new MyTree());
 	}
 	
-	/** Log an info message with optional format args. */
-	public static void i(@NonNls String message, Object... args) {
-		Timber.i(message, args);
+	/** Log a debug message with optional format args. */
+	public static void d(@NonNls String message, Object... args) {
+		Timber.d(message, args);
 	}
 	
-	/** Log an info exception and a message with optional format args. */
-	public static void i(Throwable t, @NonNls String message, Object... args) {
-		Timber.i(t, message, args);
+	/** Log a debug exception and a message with optional format args. */
+	public static void d(Throwable t, @NonNls String message, Object... args) {
+		Timber.d(t, message, args);
 	}
 	
-	/** Log an info exception. */
-	public static void i(Throwable t) {
-		Timber.i(t);
+	/** Log a debug exception. */
+	public static void d(Throwable t) {
+		Timber.d(t);
 	}
 	
 	/** Log an error message with optional format args. */

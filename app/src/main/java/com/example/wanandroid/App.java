@@ -13,6 +13,7 @@ import dagger.hilt.android.HiltAndroidApp;
 public class App extends Application {
 	
 	public static Context context;
+	public static boolean isFirstRun = true;
 	
 	public static Context getContext() {
 		return context;
