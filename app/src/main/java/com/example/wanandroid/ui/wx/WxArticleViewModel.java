@@ -1,7 +1,7 @@
 package com.example.wanandroid.ui.wx;
 
-import androidx.lifecycle.ViewModel;
+import com.example.wanandroid.base.viewmodel.BaseViewModel;
 
-public class WxArticleViewModel extends ViewModel {
+public class WxArticleViewModel extends BaseViewModel {
 	// TODO: Implement the ViewModel
 }

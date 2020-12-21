@@ -12,6 +12,8 @@ import com.example.wanandroid.Constants;
 import com.example.wanandroid.R;
 import com.example.wanandroid.util.CommonUtils;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -19,13 +21,14 @@ import me.yokeyword.fragmentation.SupportFragment;
  * @date 2020/12/16
  */
 public abstract class BaseRootFragment extends SupportFragment {
-	
+	private Unbinder unBinder;
 	private long clickTime;
 	
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(getLayoutId(), container, false);
+		unBinder = ButterKnife.bind(this, view);
 		initView();
 		return view;
 	}
@@ -33,6 +36,10 @@ public abstract class BaseRootFragment extends SupportFragment {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		if (unBinder != null && unBinder != Unbinder.EMPTY) {
+			unBinder.unbind();
+			unBinder = null;
+		}
 	}
 	
 	@Override
