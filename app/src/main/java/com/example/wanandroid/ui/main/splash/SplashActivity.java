@@ -3,21 +3,17 @@ package com.example.wanandroid.ui.main.splash;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.wanandroid.App;
 import com.example.wanandroid.R;
-import com.example.wanandroid.base.Event;
+import com.example.wanandroid.event.Event;
 import com.example.wanandroid.base.activity.BaseRootActivity;
 import com.example.wanandroid.ui.main.MainActivity;
 import com.example.wanandroid.util.StatusBarUtil;
 
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.BindViews;
 
 public class SplashActivity extends BaseRootActivity {

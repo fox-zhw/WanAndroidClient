@@ -3,7 +3,7 @@ package com.example.wanandroid.ui.main.splash;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.wanandroid.App;
-import com.example.wanandroid.base.Event;
+import com.example.wanandroid.event.Event;
 import com.example.wanandroid.base.viewmodel.BaseViewModel;
 
 import java.util.concurrent.TimeUnit;
