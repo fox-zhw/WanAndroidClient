@@ -88,6 +88,11 @@ public class SplashActivity extends BaseRootActivity {
 	}
 	
 	@Override
+	protected void initFragment() {
+	
+	}
+	
+	@Override
 	protected void onDestroy() {
 		if (mLottieAnimationViews != null) {
 			for (int i = 0; i < mLottieAnimationViews.size(); i++) {

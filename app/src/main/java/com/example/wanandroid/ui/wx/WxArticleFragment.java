@@ -18,15 +18,20 @@ import com.example.wanandroid.R;
 import com.example.wanandroid.base.fragment.BaseRootFragment;
 
 import butterknife.BindView;
+import me.yokeyword.fragmentation.SupportFragment;
 
 public class WxArticleFragment extends BaseRootFragment {
 	
-	@BindView(R.id.wx_detail_tab_layout)
-	SlidingTabLayout mTabLayout;
+//	@BindView(R.id.wx_detail_tab_layout)
+//	SlidingTabLayout mTabLayout;
 	@BindView(R.id.wx_detail_viewpager)
 	ViewPager mViewPager;
 	
 	private WxArticleViewModel mViewModel;
+	
+	public static WxArticleFragment newInstance() {
+		return new WxArticleFragment();
+	}
 	
 	@Override
 	protected int getLayoutId() {

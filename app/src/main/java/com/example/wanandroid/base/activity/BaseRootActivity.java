@@ -26,10 +26,13 @@ public abstract class BaseRootActivity extends SupportActivity {
 		unBinder = ButterKnife.bind(this);
 		mActivity = this;
 		ActivityCollector.getInstance().addActivity(this);
+		initFragment();
 		onViewCreated();
 		initToolbar();
 		initEventAndData();
 	}
+	
+	protected abstract void initFragment();
 	
 	@Override
 	protected void onDestroy() {

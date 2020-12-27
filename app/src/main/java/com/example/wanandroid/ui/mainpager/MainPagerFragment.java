@@ -13,8 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wanandroid.R;
+import com.example.wanandroid.base.fragment.BaseRootFragment;
 
-public class MainPagerFragment extends Fragment {
+public class MainPagerFragment extends BaseRootFragment {
 	
 	private MainPagerViewModel mViewModel;
 	
@@ -29,10 +30,12 @@ public class MainPagerFragment extends Fragment {
 	}
 	
 	@Override
-	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		mViewModel = ViewModelProviders.of(this).get(MainPagerViewModel.class);
-		// TODO: Use the ViewModel
+	protected int getLayoutId() {
+		return R.layout.main_pager_fragment;
 	}
 	
+	@Override
+	protected void initEventAndData() {
+		mViewModel = ViewModelProviders.of(this).get(MainPagerViewModel.class);
+	}
 }

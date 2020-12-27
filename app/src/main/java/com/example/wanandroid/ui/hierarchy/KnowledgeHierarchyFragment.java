@@ -13,8 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wanandroid.R;
+import com.example.wanandroid.base.fragment.BaseRootFragment;
 
-public class KnowledgeHierarchyFragment extends Fragment {
+import me.yokeyword.fragmentation.SupportFragment;
+
+public class KnowledgeHierarchyFragment extends BaseRootFragment {
 	
 	private KnowledgeHierarchyViewModel mViewModel;
 	
@@ -23,16 +26,12 @@ public class KnowledgeHierarchyFragment extends Fragment {
 	}
 	
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.knowledge_hierarchy_fragment, container, false);
+	protected int getLayoutId() {
+		return R.layout.knowledge_hierarchy_fragment;
 	}
 	
 	@Override
-	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
+	protected void initEventAndData() {
 		mViewModel = ViewModelProviders.of(this).get(KnowledgeHierarchyViewModel.class);
-		// TODO: Use the ViewModel
 	}
-	
 }

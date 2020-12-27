@@ -7,15 +7,27 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.library.tablayout.SlidingTabLayout;
 import com.example.wanandroid.R;
+import com.example.wanandroid.base.fragment.BaseRootFragment;
 
-public class ProjectFragment extends Fragment {
-	
+import butterknife.BindView;
+import me.yokeyword.fragmentation.SupportFragment;
+
+public class ProjectFragment extends BaseRootFragment {
+	public static final String TAG = "ProjectFragment";
+	@BindView(R.id.project_tab_layout)
+	SlidingTabLayout mTabLayout;
+	@BindView(R.id.project_divider)
+	View mDivider;
+	@BindView(R.id.project_viewpager)
+	ViewPager mViewPager;
 	private ProjectViewModel mViewModel;
 	
 	public static ProjectFragment newInstance() {
@@ -23,16 +35,18 @@ public class ProjectFragment extends Fragment {
 	}
 	
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.project_fragment, container, false);
+	protected int getLayoutId() {
+		return R.layout.project_fragment;
 	}
 	
 	@Override
-	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
+	protected void initView() {
+		super.initView();
+	}
+	
+	@Override
+	protected void initEventAndData() {
 		mViewModel = ViewModelProviders.of(this).get(ProjectViewModel.class);
-		// TODO: Use the ViewModel
 	}
 	
 }

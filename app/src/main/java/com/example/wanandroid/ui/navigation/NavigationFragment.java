@@ -15,9 +15,15 @@ import android.view.ViewGroup;
 import com.example.wanandroid.R;
 import com.example.wanandroid.base.fragment.BaseRootFragment;
 
+import me.yokeyword.fragmentation.SupportFragment;
+
 public class NavigationFragment extends BaseRootFragment {
 	
 	private NavigationViewModel mViewModel;
+	
+	public static NavigationFragment newInstance() {
+		return new NavigationFragment();
+	}
 	
 	@Override
 	protected int getLayoutId() {
