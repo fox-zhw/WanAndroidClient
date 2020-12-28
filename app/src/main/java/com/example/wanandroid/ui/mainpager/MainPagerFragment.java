@@ -2,31 +2,23 @@ package com.example.wanandroid.ui.mainpager;
 
 import androidx.lifecycle.ViewModelProviders;
 
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wanandroid.R;
-import com.example.wanandroid.base.fragment.BaseRootFragment;
+import com.example.wanandroid.base.fragment.BaseFragment;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
-public class MainPagerFragment extends BaseRootFragment {
-	
+import butterknife.BindView;
+
+public class MainPagerFragment extends BaseFragment {
+	@BindView(R.id.normal_view)
+	SmartRefreshLayout mRefreshLayout;
+	@BindView(R.id.main_pager_recycler_view)
+	RecyclerView mRecyclerView;
 	private MainPagerViewModel mViewModel;
 	
 	public static MainPagerFragment newInstance() {
 		return new MainPagerFragment();
-	}
-	
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.main_pager_fragment, container, false);
 	}
 	
 	@Override

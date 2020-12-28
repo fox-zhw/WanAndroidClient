@@ -1,22 +1,22 @@
-package com.example.wanandroid.ui.main.splash;
+package com.example.wanandroid.ui.main.launch;
 
-import android.content.Intent;
+import androidx.lifecycle.ViewModelProviders;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.wanandroid.R;
+import com.example.wanandroid.base.fragment.BaseFragment;
 import com.example.wanandroid.event.Event;
-import com.example.wanandroid.base.activity.BaseRootActivity;
-import com.example.wanandroid.ui.main.MainActivity;
+import com.example.wanandroid.ui.main.home.HomeFragment;
 import com.example.wanandroid.util.StatusBarUtil;
 
 import java.util.List;
 
 import butterknife.BindViews;
 
-public class SplashActivity extends BaseRootActivity {
+public class LaunchFragment extends BaseFragment {
+	
 	@BindViews({
 			R.id.one_animation,
 			R.id.two_animation,
@@ -42,27 +42,27 @@ public class SplashActivity extends BaseRootActivity {
 			"O.json",
 			"D.json"
 	};
+	private LaunchViewModel mViewModel;
 	
-	private SplashViewModel mViewModel;
+	public static LaunchFragment newInstance() {
+		return new LaunchFragment();
+	}
+
 	
 	@Override
 	protected int getLayoutId() {
-		return R.layout.activity_splash;
+		return R.layout.launch_fragment;
 	}
 	
 	@Override
-	protected void onViewCreated() {
-	
-	}
-	
-	@Override
-	protected void initToolbar() {
-		StatusBarUtil.immersive(SplashActivity.this);
+	protected void initView() {
+		super.initView();
+		StatusBarUtil.immersive(getActivity());
 	}
 	
 	@Override
 	protected void initEventAndData() {
-		mViewModel = new ViewModelProvider(this).get(SplashViewModel.class);
+		mViewModel = ViewModelProviders.of(this).get(LaunchViewModel.class);
 		
 		mViewModel.startAnimationEvent.observe(this, new Event.EventObserver<Object>() {
 			@Override
@@ -80,25 +80,18 @@ public class SplashActivity extends BaseRootActivity {
 		mViewModel.jumpToMain.observe(this, new Event.EventObserver<Object>() {
 			@Override
 			public void onEventChanged(@NonNull Object o) {
-				startActivity(new Intent(SplashActivity.this, MainActivity.class));
-				SplashActivity.this.finish();
-				SplashActivity.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+				replaceFragment(HomeFragment.newInstance(), false);
 			}
 		});
 	}
 	
 	@Override
-	protected void initFragment() {
-	
-	}
-	
-	@Override
-	protected void onDestroy() {
+	public void onDestroyView() {
 		if (mLottieAnimationViews != null) {
 			for (int i = 0; i < mLottieAnimationViews.size(); i++) {
 				mLottieAnimationViews.get(i).cancelAnimation();
 			}
 		}
-		super.onDestroy();
+		super.onDestroyView();
 	}
 }

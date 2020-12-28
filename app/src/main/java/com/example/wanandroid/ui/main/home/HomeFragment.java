@@ -1,21 +1,25 @@
-package com.example.wanandroid.ui.main;
+package com.example.wanandroid.ui.main.home;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProviders;
+
+import androidx.annotation.NonNull;
 
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import com.example.wanandroid.R;
-import com.example.wanandroid.base.activity.BaseRootActivity;
+import com.example.wanandroid.base.fragment.BaseFragment;
+import com.example.wanandroid.ui.abort.AbortUsFragment;
 import com.example.wanandroid.ui.hierarchy.KnowledgeHierarchyFragment;
 import com.example.wanandroid.ui.mainpager.MainPagerFragment;
 import com.example.wanandroid.ui.navigation.NavigationFragment;
@@ -29,15 +33,15 @@ import com.google.android.material.navigation.NavigationView;
 import butterknife.BindView;
 import me.yokeyword.fragmentation.SupportFragment;
 
-public class MainActivity extends BaseRootActivity {
-	
+public class HomeFragment extends BaseFragment {
+	public static final String TAG = "HomeFragment";
 	@BindView(R.id.drawer_layout)
 	DrawerLayout mDrawerLayout;
 	@BindView(R.id.common_toolbar)
 	Toolbar mToolbar;
 	@BindView(R.id.common_toolbar_title_tv)
 	TextView mTitleTv;
-//	@BindView(R.id.main_floating_action_btn)
+	//	@BindView(R.id.main_floating_action_btn)
 //	FloatingActionButton mFloatingActionButton;
 	@BindView(R.id.bottom_navigation_view)
 	BottomNavigationView mBottomNavigationView;
@@ -45,6 +49,8 @@ public class MainActivity extends BaseRootActivity {
 	NavigationView mNavigationView;
 	@BindView(R.id.fragment_group)
 	FrameLayout mFrameGroup;
+	
+	private HomeViewModel mViewModel;
 	
 	public static final int MAIN_PAGER = 0;
 	public static final int HIERARCHY = 1;
@@ -55,8 +61,64 @@ public class MainActivity extends BaseRootActivity {
 	
 	private SupportFragment[] mFragments = new SupportFragment[5];
 	
+	public static HomeFragment newInstance() {
+		return new HomeFragment();
+	}
+	
 	@Override
-	protected void initFragment() {
+	protected int getLayoutId() {
+		return R.layout.home_fragment;
+	}
+	
+	@Override
+	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.menu_activity_main, menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.action_usage:
+				// TODO: 2020/12/20 usage
+				break;
+			case R.id.action_search:
+				// TODO: 2020/12/20 search
+				break;
+			default:
+				break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	protected void initView() {
+		setHasOptionsMenu(true);
+		initFragment();
+		initToolbar();
+		initNavigationView();
+		initBottomNavigationView();
+		initDrawerLayout();
+	}
+	
+	protected void initToolbar() {
+		((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+		ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setDisplayShowTitleEnabled(false);
+		}
+		mTitleTv.setText(getString(R.string.home_pager));
+		StatusBarUtil.setStatusColor(getActivity().getWindow(), ContextCompat.getColor(getActivity(), R.color.main_status_bar_blue), 1f);
+		mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+//				onBackPressedSupport();
+				mDrawerLayout.openDrawer(mNavigationView);
+			}
+		});
+	}
+	
+	private void initFragment() {
 		SupportFragment firstFragment = findFragment(MainPagerFragment.class);
 		if (firstFragment == null) {
 			mFragments[MAIN_PAGER] = MainPagerFragment.newInstance();
@@ -72,7 +134,6 @@ public class MainActivity extends BaseRootActivity {
 					mFragments[NAVIGATION],
 					mFragments[PROJECT]);
 			
-			mCurrentFragment = MAIN_PAGER;
 		} else {
 			// 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
 			
@@ -83,21 +144,8 @@ public class MainActivity extends BaseRootActivity {
 			mFragments[NAVIGATION] = findFragment(NavigationFragment.class);
 			mFragments[PROJECT] = findFragment(ProjectFragment.class);
 			
-			mCurrentFragment = MAIN_PAGER;
 		}
-	}
-	
-	@Override
-	protected int getLayoutId() {
-		return R.layout.activity_main;
-	}
-	
-	@Override
-	protected void onViewCreated() {
-		
-		initNavigationView();
-		initBottomNavigationView();
-		initDrawerLayout();
+		mCurrentFragment = MAIN_PAGER;
 	}
 	
 	private void initNavigationView() {
@@ -107,14 +155,23 @@ public class MainActivity extends BaseRootActivity {
 				.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						return false;
+						return true;
+					}
+				});
+		
+		mNavigationView.getMenu().findItem(R.id.nav_item_about_us)
+				.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						start(AbortUsFragment.newInstance(), SINGLETASK);
+						return true;
 					}
 				});
 	}
 	
 	private void initDrawerLayout() {
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-				this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+				getActivity(), mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
 			@Override
 			public void onDrawerSlide(View drawerView, float slideOffset) {
 				//获取mDrawerLayout中的第一个子布局，也就是布局中的RelativeLayout
@@ -180,54 +237,12 @@ public class MainActivity extends BaseRootActivity {
 	}
 	
 	@Override
-	protected void initToolbar() {
-		setSupportActionBar(mToolbar);
-		ActionBar actionBar = getSupportActionBar();
-		assert actionBar != null;
-		actionBar.setDisplayShowTitleEnabled(false);
-		mTitleTv.setText(getString(R.string.home_pager));
-		StatusBarUtil.setStatusColor(getWindow(), ContextCompat.getColor(this, R.color.main_status_bar_blue), 1f);
-		mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-//				onBackPressedSupport();
-				mDrawerLayout.openDrawer(mNavigationView);
-			}
-		});
-	}
-	
-	@Override
 	protected void initEventAndData() {
-	
+		mViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.menu_activity_main, menu);
-		return true;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.action_usage:
-				// TODO: 2020/12/20 usage
-				break;
-			case R.id.action_search:
-				// TODO: 2020/12/20 search
-				break;
-			default:
-				break;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-	
-	@Override
-	public void onBackPressedSupport() {
-		if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-			pop();
-		} else {
-			ActivityCompat.finishAfterTransition(this);
-		}
+	public boolean onBackPressedSupport() {
+		return super.onBackPressedSupport();
 	}
 }

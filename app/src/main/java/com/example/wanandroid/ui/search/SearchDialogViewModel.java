@@ -1,4 +1,4 @@
-package com.example.wanandroid.ui.main.search;
+package com.example.wanandroid.ui.search;
 
 import androidx.lifecycle.ViewModel;
 

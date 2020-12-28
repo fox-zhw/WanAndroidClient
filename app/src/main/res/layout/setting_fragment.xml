@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBackground"
     android:orientation="vertical"
-    tools:context=".ui.main.setting.SettingFragment">
+    tools:context=".ui.setting.SettingFragment">
 
     <TextView
         android:id="@+id/setting_usage_tv"

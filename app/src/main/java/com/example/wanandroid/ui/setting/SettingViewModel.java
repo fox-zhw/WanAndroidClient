@@ -1,4 +1,4 @@
-package com.example.wanandroid.ui.main.setting;
+package com.example.wanandroid.ui.setting;
 
 import androidx.lifecycle.ViewModel;
 

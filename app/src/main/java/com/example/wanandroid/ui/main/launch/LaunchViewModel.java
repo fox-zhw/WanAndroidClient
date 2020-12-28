@@ -1,33 +1,30 @@
-package com.example.wanandroid.ui.main.splash;
+package com.example.wanandroid.ui.main.launch;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.wanandroid.App;
-import com.example.wanandroid.event.Event;
 import com.example.wanandroid.base.viewmodel.BaseViewModel;
+import com.example.wanandroid.event.Event;
 
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
-/**
- * @author 52512
- * @date 2020/12/20
- */
-public class SplashViewModel extends BaseViewModel {
-	
+public class LaunchViewModel extends BaseViewModel {
+	// TODO: Implement the ViewModel
 	final MutableLiveData<Event<Object>> startAnimationEvent = new MutableLiveData<>();
 	
 	final MutableLiveData<Event<Object>> jumpToMain = new MutableLiveData<>();
 	
-	public SplashViewModel() {
+	public LaunchViewModel() {
 		if (!App.isFirstRun) {
 			jumpToMain.setValue(new Event<>(new Object()));
 		} else {
 			App.isFirstRun = false;
 			startAnimationEvent.setValue(new Event<>(new Object()));
-			addDisposable(Observable.timer(5000, TimeUnit.MILLISECONDS)
+			addDisposable(Observable.timer(3000, TimeUnit.MILLISECONDS)
 					.subscribe(new Consumer<Long>() {
 						@Override
 						public void accept(Long aLong) throws Exception {
@@ -36,4 +33,5 @@ public class SplashViewModel extends BaseViewModel {
 					}));
 		}
 	}
+	
 }
