@@ -17,8 +17,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static org.junit.Assert.*;
-
 /**
  * @author zhaohw
  * @date 2020/12/29

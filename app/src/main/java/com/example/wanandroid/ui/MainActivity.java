@@ -6,6 +6,9 @@ import com.example.wanandroid.base.activity.BaseRootActivity;
 import com.example.wanandroid.ui.main.home.HomeFragment;
 import com.example.wanandroid.ui.main.launch.LaunchFragment;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends BaseRootActivity {
 	
 	@Override

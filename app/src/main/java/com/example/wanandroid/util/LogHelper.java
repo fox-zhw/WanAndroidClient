@@ -55,7 +55,7 @@ public class LogHelper {
 		@Override
 		protected void log(int priority, String tag, @NotNull String message, Throwable t) {
 			StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-			int index = 7;
+			int index = 8;
 			String className = stackTrace[index].getFileName();
 			int lineNumber = stackTrace[index].getLineNumber();
 			StringBuilder sbMsg = new StringBuilder();

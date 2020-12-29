@@ -3,6 +3,8 @@ package com.example.wanandroid.data.sp;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.annotation.NonNull;
+
 import com.example.wanandroid.App;
 import com.example.wanandroid.Constants;
 
@@ -17,8 +19,8 @@ public class PreferenceHelperImpl implements PreferenceHelper {
 	private final SharedPreferences mPreferences;
 	
 	@Inject
-	PreferenceHelperImpl() {
-		mPreferences = App.getContext().getSharedPreferences(Constants.MY_SHARED_PREFERENCE, Context.MODE_PRIVATE);
+	public PreferenceHelperImpl(@NonNull Context context) {
+		mPreferences = context.getSharedPreferences(Constants.MY_SHARED_PREFERENCE, Context.MODE_PRIVATE);
 	}
 	
 	@Override

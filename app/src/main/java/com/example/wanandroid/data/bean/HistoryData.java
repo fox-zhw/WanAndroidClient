@@ -21,11 +21,6 @@ public class HistoryData {
 	
 	}
 	
-	public HistoryData(long date, String data) {
-		this.date = date;
-		this.data = data;
-	}
-	
 	public long getId() {
 		return id;
 	}

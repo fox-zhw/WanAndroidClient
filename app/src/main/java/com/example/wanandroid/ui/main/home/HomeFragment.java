@@ -202,7 +202,7 @@ public class HomeFragment extends BaseFragment {
 	}
 	
 	private void initBottomNavigationView() {
-		BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView);
+//		BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView);
 		mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 			@Override
 			public boolean onNavigationItemSelected(@NonNull MenuItem item) {

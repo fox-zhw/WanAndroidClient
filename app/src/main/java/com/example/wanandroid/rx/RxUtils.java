@@ -1,4 +1,4 @@
-package com.example.wanandroid.util;
+package com.example.wanandroid.rx;
 
 import org.reactivestreams.Publisher;
 

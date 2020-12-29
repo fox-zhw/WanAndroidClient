@@ -2,7 +2,7 @@ package com.example.wanandroid.base.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.wanandroid.util.RxUtils;
+import com.example.wanandroid.rx.RxUtils;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;

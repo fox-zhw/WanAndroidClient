@@ -15,6 +15,8 @@ import com.example.wanandroid.data.remote.api.GeeksApis;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 
 /**
@@ -22,10 +24,10 @@ import io.reactivex.Observable;
  * @date 2020/12/13
  */
 public class HttpHelperImpl implements HttpHelper {
+	GeeksApis mGeeksApis;
 	
-	private GeeksApis mGeeksApis;
-	
-	HttpHelperImpl(GeeksApis geeksApis) {
+	@Inject
+	public HttpHelperImpl(GeeksApis geeksApis) {
 		mGeeksApis = geeksApis;
 	}
 	

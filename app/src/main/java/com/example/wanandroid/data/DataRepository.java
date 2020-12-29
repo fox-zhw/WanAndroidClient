@@ -18,6 +18,8 @@ import com.example.wanandroid.data.sp.PreferenceHelper;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 
 /**
@@ -25,213 +27,225 @@ import io.reactivex.Observable;
  * @date 2020/12/13
  */
 public class DataRepository implements HttpHelper, DbHelper, PreferenceHelper {
-	@Override
-	public List<HistoryData> addHistoryData(String data) {
-		return null;
-	}
 	
-	@Override
-	public void clearHistoryData() {
+	private HttpHelper mHttpHelper;
+	private DbHelper mDbHelper;
+	private PreferenceHelper mPreferenceHelper;
 	
-	}
-	
-	@Override
-	public List<HistoryData> loadAllHistoryData() {
-		return null;
+	@Inject
+	public DataRepository(HttpHelper httpHelper, DbHelper dbhelper, PreferenceHelper preferencesHelper) {
+		mHttpHelper = httpHelper;
+		mDbHelper = dbhelper;
+		mPreferenceHelper = preferencesHelper;
 	}
 	
 	@Override
 	public Observable<BaseResponse<FeedArticleListData>> getFeedArticleList(int pageNum) {
-		return null;
+		return mHttpHelper.getFeedArticleList(pageNum);
 	}
 	
 	@Override
 	public Observable<BaseResponse<FeedArticleListData>> getSearchList(int pageNum, String k) {
-		return null;
+		return mHttpHelper.getSearchList(pageNum, k);
 	}
 	
 	@Override
 	public Observable<BaseResponse<List<TopSearchData>>> getTopSearchData() {
-		return null;
+		return mHttpHelper.getTopSearchData();
 	}
 	
 	@Override
 	public Observable<BaseResponse<List<UsefulSiteData>>> getUsefulSites() {
-		return null;
+		return mHttpHelper.getUsefulSites();
 	}
 	
 	@Override
 	public Observable<BaseResponse<List<KnowledgeHierarchyData>>> getKnowledgeHierarchyData() {
-		return null;
+		return mHttpHelper.getKnowledgeHierarchyData();
 	}
 	
 	@Override
 	public Observable<BaseResponse<FeedArticleListData>> getKnowledgeHierarchyDetailData(int page, int cid) {
-		return null;
+		return mHttpHelper.getKnowledgeHierarchyDetailData(page, cid);
 	}
 	
 	@Override
 	public Observable<BaseResponse<List<NavigationListData>>> getNavigationListData() {
-		return null;
+		return mHttpHelper.getNavigationListData();
 	}
 	
 	@Override
 	public Observable<BaseResponse<List<ProjectClassifyData>>> getProjectClassifyData() {
-		return null;
+		return mHttpHelper.getProjectClassifyData();
 	}
 	
 	@Override
 	public Observable<BaseResponse<ProjectListData>> getProjectListData(int page, int cid) {
-		return null;
+		return mHttpHelper.getProjectListData(page, cid);
 	}
 	
 	@Override
 	public Observable<BaseResponse<List<WxAuthor>>> getWxAuthorListData() {
-		return null;
+		return mHttpHelper.getWxAuthorListData();
 	}
 	
 	@Override
 	public Observable<BaseResponse<FeedArticleListData>> getWxSumData(int id, int page) {
-		return null;
+		return mHttpHelper.getWxSumData(id, page);
 	}
 	
 	@Override
 	public Observable<BaseResponse<FeedArticleListData>> getWxSearchSumData(int id, int page, String k) {
-		return null;
+		return mHttpHelper.getWxSearchSumData(id, page, k);
 	}
 	
 	@Override
 	public Observable<BaseResponse<LoginData>> getLoginData(String username, String password) {
-		return null;
+		return mHttpHelper.getLoginData(username, password);
 	}
 	
 	@Override
-	public Observable<BaseResponse<LoginData>> getRegisterData(String username, String password, String rePassword) {
-		return null;
+	public Observable<BaseResponse<LoginData>> getRegisterData(String username, String password, String repassword) {
+		return mHttpHelper.getRegisterData(username, password, repassword);
 	}
 	
 	@Override
 	public Observable<BaseResponse<LoginData>> logout() {
-		return null;
+		return mHttpHelper.logout();
 	}
 	
 	@Override
 	public Observable<BaseResponse<FeedArticleListData>> addCollectArticle(int id) {
-		return null;
+		return mHttpHelper.addCollectArticle(id);
 	}
 	
 	@Override
 	public Observable<BaseResponse<FeedArticleListData>> addCollectOutsideArticle(String title, String author, String link) {
-		return null;
+		return mHttpHelper.addCollectOutsideArticle(title, author, link);
 	}
 	
 	@Override
 	public Observable<BaseResponse<FeedArticleListData>> getCollectList(int page) {
-		return null;
-	}
-	
-	@Override
-	public Observable<BaseResponse<FeedArticleListData>> cancelCollectPageArticle(int id) {
-		return null;
+		return mHttpHelper.getCollectList(page);
 	}
 	
 	@Override
 	public Observable<BaseResponse<FeedArticleListData>> cancelCollectArticle(int id) {
-		return null;
+		return mHttpHelper.cancelCollectArticle(id);
 	}
 	
 	@Override
 	public Observable<BaseResponse<List<BannerData>>> getBannerData() {
-		return null;
+		return mHttpHelper.getBannerData();
+	}
+	
+	@Override
+	public Observable<BaseResponse<FeedArticleListData>> cancelCollectPageArticle(int id) {
+		return mHttpHelper.cancelCollectPageArticle(id);
 	}
 	
 	@Override
 	public void setLoginAccount(String account) {
-	
+		mPreferenceHelper.setLoginAccount(account);
 	}
 	
 	@Override
 	public void setLoginPassword(String password) {
-	
+		mPreferenceHelper.setLoginPassword(password);
 	}
 	
 	@Override
 	public String getLoginAccount() {
-		return null;
+		return mPreferenceHelper.getLoginAccount();
 	}
 	
 	@Override
 	public String getLoginPassword() {
-		return null;
+		return mPreferenceHelper.getLoginPassword();
 	}
 	
 	@Override
 	public void setLoginStatus(boolean isLogin) {
-	
+		mPreferenceHelper.setLoginStatus(isLogin);
 	}
 	
 	@Override
 	public boolean getLoginStatus() {
-		return false;
+		return mPreferenceHelper.getLoginStatus();
 	}
 	
 	@Override
 	public void setCookie(String domain, String cookie) {
-	
+		mPreferenceHelper.setCookie(domain, cookie);
 	}
 	
 	@Override
 	public String getCookie(String domain) {
-		return null;
+		return mPreferenceHelper.getCookie(domain);
 	}
 	
 	@Override
 	public void setCurrentPage(int position) {
-	
+		mPreferenceHelper.setCurrentPage(position);
 	}
 	
 	@Override
 	public int getCurrentPage() {
-		return 0;
+		return mPreferenceHelper.getCurrentPage();
 	}
 	
 	@Override
 	public void setProjectCurrentPage(int position) {
-	
+		mPreferenceHelper.setProjectCurrentPage(position);
 	}
 	
 	@Override
 	public int getProjectCurrentPage() {
-		return 0;
+		return mPreferenceHelper.getProjectCurrentPage();
 	}
 	
 	@Override
 	public boolean getAutoCacheState() {
-		return false;
+		return mPreferenceHelper.getAutoCacheState();
 	}
 	
 	@Override
 	public boolean getNoImageState() {
-		return false;
+		return mPreferenceHelper.getNoImageState();
 	}
 	
 	@Override
 	public boolean getNightModeState() {
-		return false;
+		return mPreferenceHelper.getNightModeState();
 	}
 	
 	@Override
 	public void setNightModeState(boolean b) {
-	
+		mPreferenceHelper.setNightModeState(b);
 	}
 	
 	@Override
 	public void setNoImageState(boolean b) {
-	
+		mPreferenceHelper.setNoImageState(b);
 	}
 	
 	@Override
 	public void setAutoCacheState(boolean b) {
+		mPreferenceHelper.setAutoCacheState(b);
+	}
 	
+	@Override
+	public List<HistoryData> addHistoryData(String data) {
+		return mDbHelper.addHistoryData(data);
+	}
+	
+	@Override
+	public void clearHistoryData() {
+		mDbHelper.clearHistoryData();
+	}
+	
+	@Override
+	public List<HistoryData> loadAllHistoryData() {
+		return mDbHelper.loadAllHistoryData();
 	}
 }

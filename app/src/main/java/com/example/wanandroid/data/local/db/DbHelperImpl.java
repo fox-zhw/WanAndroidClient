@@ -8,16 +8,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * @author 52512
  * @date 2020/12/28
  */
 public class DbHelperImpl implements DbHelper {
 	private static final int HISTORY_LIST_SIZE = 10;
-	private HistoryDao mHistoryDao;
+	@Inject
+	HistoryDao mHistoryDao;
 	
-	public DbHelperImpl(@NonNull HistoryDao historyDao) {
-		mHistoryDao = historyDao;
+	@Inject
+	public DbHelperImpl() {
 	}
 	
 	@Override

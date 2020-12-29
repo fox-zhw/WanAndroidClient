@@ -20,7 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class MainPagerFragment extends BaseFragment {
 	@BindView(R.id.normal_view)
 	SmartRefreshLayout mRefreshLayout;
@@ -45,7 +47,7 @@ public class MainPagerFragment extends BaseFragment {
 	@Override
 	protected void initView() {
 		super.initView();
-		initRecyclerView();
+//		initRecyclerView();
 	}
 	
 	private void initRecyclerView() {
