@@ -71,4 +71,17 @@ public class FeedArticleListData {
 	public void setTotal(int total) {
 		this.total = total;
 	}
+	
+	@Override
+	public String toString() {
+		return "FeedArticleListData{" +
+				"curPage=" + curPage +
+				", datas=" + datas +
+				", offset=" + offset +
+				", over=" + over +
+				", pageCount=" + pageCount +
+				", size=" + size +
+				", total=" + total +
+				'}';
+	}
 }
