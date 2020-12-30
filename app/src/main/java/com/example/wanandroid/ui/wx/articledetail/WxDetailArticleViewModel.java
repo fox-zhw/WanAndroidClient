@@ -1,4 +1,4 @@
-package com.example.wanandroid.ui.wx;
+package com.example.wanandroid.ui.wx.articledetail;
 
 import androidx.lifecycle.ViewModel;
 

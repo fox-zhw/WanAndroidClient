@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.example.wanandroid.App;
 import com.example.wanandroid.R;
 import com.example.wanandroid.base.fragment.BaseFragment;
+import com.example.wanandroid.base.fragment.BaseRootFragment;
 import com.example.wanandroid.util.DensityUtil;
 import com.example.wanandroid.util.StatusBarUtil;
 import com.google.android.material.appbar.AppBarLayout;
@@ -36,7 +37,7 @@ import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener;
 
 import butterknife.BindView;
 
-public class AbortUsFragment extends BaseFragment {
+public class AbortUsFragment extends BaseRootFragment {
 	public static final String TAG = "AbortUsFragment";
 	@BindView(R.id.about_us_mountain)
 	MountainSceneView mAboutUsMountain;

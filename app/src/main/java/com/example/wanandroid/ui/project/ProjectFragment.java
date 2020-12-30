@@ -9,10 +9,11 @@ import android.view.View;
 import com.example.library.tablayout.SlidingTabLayout;
 import com.example.wanandroid.R;
 import com.example.wanandroid.base.fragment.BaseFragment;
+import com.example.wanandroid.base.fragment.BaseRootFragment;
 
 import butterknife.BindView;
 
-public class ProjectFragment extends BaseFragment {
+public class ProjectFragment extends BaseRootFragment {
 	public static final String TAG = "ProjectFragment";
 	@BindView(R.id.project_tab_layout)
 	SlidingTabLayout mTabLayout;

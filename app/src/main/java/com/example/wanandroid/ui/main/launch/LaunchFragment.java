@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.wanandroid.R;
 import com.example.wanandroid.base.fragment.BaseFragment;
+import com.example.wanandroid.base.fragment.BaseRootFragment;
 import com.example.wanandroid.event.Event;
 import com.example.wanandroid.ui.main.home.HomeFragment;
 import com.example.wanandroid.util.StatusBarUtil;
@@ -15,7 +16,7 @@ import java.util.List;
 
 import butterknife.BindViews;
 
-public class LaunchFragment extends BaseFragment {
+public class LaunchFragment extends BaseRootFragment {
 	
 	@BindViews({
 			R.id.one_animation,

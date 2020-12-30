@@ -1,7 +1,5 @@
 package com.example.wanandroid.ui.mainpager;
 
-import android.util.Pair;
-
 import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.MutableLiveData;
 
@@ -10,13 +8,13 @@ import com.example.wanandroid.data.DataRepository;
 import com.example.wanandroid.data.bean.BaseResponse;
 import com.example.wanandroid.data.bean.main.banner.BannerData;
 import com.example.wanandroid.data.bean.main.collect.FeedArticleListData;
+import com.example.wanandroid.data.bean.main.login.LoginData;
 import com.example.wanandroid.event.Event;
 import com.example.wanandroid.util.LogHelper;
 
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -46,11 +44,25 @@ public class MainPagerViewModel extends BaseViewModel {
 				});
 	}
 	
-	void loadMainPagerData() {
+	public void loadMainPagerData() {
+		Observable<BaseResponse<LoginData>> mLoginObservable = mDataRepository.getLoginData(getLoginAccount(), getLoginPassword());
+		Observable<BaseResponse<List<BannerData>>> mBannerObservable = mDataRepository.getBannerData();
+		Observable<BaseResponse<FeedArticleListData>> mArticleObservable = mDataRepository.getFeedArticleList(0);
+	}
+	
+	public String getLoginPassword() {
+		return mDataRepository.getLoginPassword();
+	}
+	
+	public String getLoginAccount() {
+		return mDataRepository.getLoginAccount();
+	}
+	
+	void autoRefresh(boolean b) {
 	
 	}
 	
-	void autoRefresh() {
+	public void loadMore() {
 	
 	}
 }

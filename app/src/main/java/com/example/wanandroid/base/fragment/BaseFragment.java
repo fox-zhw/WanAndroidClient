@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.wanandroid.Constants;
-import com.example.wanandroid.R;
-import com.example.wanandroid.util.CommonUtils;
+import com.example.wanandroid.base.IView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -20,7 +18,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  * @author zhaohw
  * @date 2020/12/16
  */
-public abstract class BaseFragment extends SupportFragment {
+public abstract class BaseFragment extends SupportFragment implements IView {
 	private Unbinder unBinder;
 	private long clickTime;
 	

@@ -1,4 +1,4 @@
-package com.example.wanandroid.ui.wx;
+package com.example.wanandroid.ui.wx.articledetail;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -13,8 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wanandroid.R;
+import com.example.wanandroid.base.fragment.BaseFragment;
+import com.example.wanandroid.base.fragment.BaseRootFragment;
 
-public class WxDetailArticleFragment extends Fragment {
+public class WxDetailArticleFragment extends BaseRootFragment {
 	
 	private WxDetailArticleViewModel mViewModel;
 	
@@ -22,10 +24,13 @@ public class WxDetailArticleFragment extends Fragment {
 		return new WxDetailArticleFragment();
 	}
 	
+	public static BaseFragment getInstance(int id, String name) {
+		return new WxDetailArticleFragment();
+	}
+	
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.wx_detail_article_fragment, container, false);
+	protected int getLayoutId() {
+		return R.layout.wx_detail_article_fragment;
 	}
 	
 	@Override

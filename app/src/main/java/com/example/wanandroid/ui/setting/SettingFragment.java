@@ -10,13 +10,14 @@ import android.widget.TextView;
 
 import com.example.wanandroid.R;
 import com.example.wanandroid.base.fragment.BaseFragment;
+import com.example.wanandroid.base.fragment.BaseRootFragment;
 
 import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class SettingFragment extends BaseFragment implements CompoundButton.OnCheckedChangeListener{
+public class SettingFragment extends BaseRootFragment implements CompoundButton.OnCheckedChangeListener{
 	
 	private SettingViewModel mViewModel;
 	

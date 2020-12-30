@@ -18,22 +18,23 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.wanandroid.R;
-import com.example.wanandroid.base.fragment.BaseFragment;
+import com.example.wanandroid.base.fragment.BaseRootFragment;
 import com.example.wanandroid.ui.abort.AbortUsFragment;
 import com.example.wanandroid.ui.hierarchy.KnowledgeHierarchyFragment;
 import com.example.wanandroid.ui.mainpager.MainPagerFragment;
 import com.example.wanandroid.ui.navigation.NavigationFragment;
 import com.example.wanandroid.ui.project.ProjectFragment;
-import com.example.wanandroid.ui.wx.WxArticleFragment;
-import com.example.wanandroid.util.BottomNavigationViewHelper;
+import com.example.wanandroid.ui.wx.article.WxArticleFragment;
 import com.example.wanandroid.util.StatusBarUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import butterknife.BindView;
+import dagger.hilt.android.AndroidEntryPoint;
 import me.yokeyword.fragmentation.SupportFragment;
 
-public class HomeFragment extends BaseFragment {
+@AndroidEntryPoint
+public class HomeFragment extends BaseRootFragment {
 	public static final String TAG = "HomeFragment";
 	@BindView(R.id.drawer_layout)
 	DrawerLayout mDrawerLayout;
@@ -209,24 +210,19 @@ public class HomeFragment extends BaseFragment {
 				int prePosition = mCurrentFragment;
 				switch (item.getItemId()) {
 					case R.id.tab_main_pager:
-						mCurrentFragment = MAIN_PAGER;
-						showHideFragment(mFragments[mCurrentFragment], mFragments[prePosition]);
+						switchPager(MAIN_PAGER, prePosition);
 						break;
 					case R.id.tab_knowledge_hierarchy:
-						mCurrentFragment = HIERARCHY;
-						showHideFragment(mFragments[mCurrentFragment], mFragments[prePosition]);
+						switchPager(HIERARCHY, prePosition);
 						break;
 					case R.id.tab_wx_article:
-						mCurrentFragment = WX;
-						showHideFragment(mFragments[mCurrentFragment], mFragments[prePosition]);
+						switchPager(WX, prePosition);
 						break;
 					case R.id.tab_navigation:
-						mCurrentFragment = NAVIGATION;
-						showHideFragment(mFragments[mCurrentFragment], mFragments[prePosition]);
+						switchPager(NAVIGATION, prePosition);
 						break;
 					case R.id.tab_project:
-						mCurrentFragment = PROJECT;
-						showHideFragment(mFragments[mCurrentFragment], mFragments[prePosition]);
+						switchPager(PROJECT, prePosition);
 						break;
 					default:
 						break;
@@ -234,6 +230,12 @@ public class HomeFragment extends BaseFragment {
 				return true;
 			}
 		});
+	}
+	
+	private void switchPager(int curfragment, int preFragment) {
+		mCurrentFragment = curfragment;
+		showHideFragment(mFragments[curfragment], mFragments[preFragment]);
+		mViewModel.setCurrentPage(curfragment);
 	}
 	
 	@Override

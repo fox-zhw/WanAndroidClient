@@ -4,8 +4,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.wanandroid.R;
 import com.example.wanandroid.base.fragment.BaseFragment;
+import com.example.wanandroid.base.fragment.BaseRootFragment;
 
-public class NavigationFragment extends BaseFragment {
+public class NavigationFragment extends BaseRootFragment {
 	
 	private NavigationViewModel mViewModel;
 	
