@@ -49,7 +49,7 @@ public abstract class BaseViewModel extends ViewModel {
 				.subscribe(action));
 	}
 	
-	protected void addDisposable(Disposable disposable) {
+	public void addDisposable(Disposable disposable) {
 		mDisposable.add(disposable);
 	}
 	
