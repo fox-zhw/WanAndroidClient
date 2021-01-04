@@ -3,7 +3,8 @@ package com.example.wanandroid.base.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.wanandroid.event.Event;
+import com.example.wanandroid.data.DataRepository;
+import com.example.wanandroid.base.event.Event;
 import com.example.wanandroid.rx.RxUtils;
 
 import io.reactivex.Completable;
@@ -21,7 +22,13 @@ import timber.log.Timber;
  */
 public abstract class BaseViewModel extends ViewModel {
 	
+	protected final DataRepository mDataRepository;
+	
 	final CompositeDisposable mDisposable = new CompositeDisposable();
+	
+	public BaseViewModel(DataRepository dataRepository) {
+		mDataRepository = dataRepository;
+	}
 	
 	public <T> void addDisposable(Flowable<T> flowable, Consumer<T> consumer) {
 		try {
@@ -53,14 +60,45 @@ public abstract class BaseViewModel extends ViewModel {
 		mDisposable.add(disposable);
 	}
 	
+	public boolean getNightModeState() {
+		return mDataRepository.getNightModeState();
+	}
+	
+	public void setLoginStatus(boolean loginStatus) {
+		mDataRepository.setLoginStatus(loginStatus);
+	}
+	
+	public boolean getLoginStatus() {
+		return mDataRepository.getLoginStatus();
+	}
+	
+	public String getLoginAccount() {
+		return mDataRepository.getLoginAccount();
+	}
+	
+	public void setLoginAccount(String account) {
+		mDataRepository.setLoginAccount(account);
+	}
+	
+	public void setLoginPassword(String password) {
+		mDataRepository.setLoginPassword(password);
+	}
+	
+	public int getCurrentPage() {
+		return mDataRepository.getCurrentPage();
+	}
+	
 	@Override
 	protected void onCleared() {
 		mDisposable.clear();
 		super.onCleared();
 	}
 	
+	// toast
 	public final MutableLiveData<Event<String>> mToastMsgEvent = new MutableLiveData<>();
+	// snack bar
 	public final MutableLiveData<Event<String>> mSnackBarMsgEvent = new MutableLiveData<>();
+	// show error
 	public final MutableLiveData<Event<Object>> mShowErrorEvent = new MutableLiveData<>();
 	
 }

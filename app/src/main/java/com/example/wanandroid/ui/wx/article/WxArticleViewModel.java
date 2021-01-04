@@ -8,7 +8,7 @@ import com.example.wanandroid.R;
 import com.example.wanandroid.base.viewmodel.BaseViewModel;
 import com.example.wanandroid.data.DataRepository;
 import com.example.wanandroid.data.bean.wx.WxAuthor;
-import com.example.wanandroid.event.Event;
+import com.example.wanandroid.base.event.Event;
 import com.example.wanandroid.rx.BaseObserver;
 import com.example.wanandroid.rx.RxUtils;
 
@@ -17,13 +17,11 @@ import java.util.List;
 public class WxArticleViewModel extends BaseViewModel {
 	public static final String TAG = "WxArticleViewModel";
 	
-	final DataRepository mDataRepository;
-	
 	final MutableLiveData<List<WxAuthor>> mWxAuthorListLiveData = new MutableLiveData<>();
 	
 	@ViewModelInject
 	public WxArticleViewModel(DataRepository dataRepository) {
-		mDataRepository = dataRepository;
+		super(dataRepository);
 	}
 	
 	/**

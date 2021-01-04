@@ -1,11 +1,12 @@
 package com.example.wanandroid.ui.main.launch;
 
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.wanandroid.App;
 import com.example.wanandroid.base.viewmodel.BaseViewModel;
-import com.example.wanandroid.event.Event;
+import com.example.wanandroid.data.DataRepository;
+import com.example.wanandroid.base.event.Event;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +19,9 @@ public class LaunchViewModel extends BaseViewModel {
 	
 	final MutableLiveData<Event<Object>> jumpToMain = new MutableLiveData<>();
 	
-	public LaunchViewModel() {
+	@ViewModelInject
+	public LaunchViewModel(DataRepository dataRepository) {
+		super(dataRepository);
 		if (!App.isFirstRun) {
 			jumpToMain.setValue(new Event<>(new Object()));
 		} else {

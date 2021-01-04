@@ -2,6 +2,8 @@ package com.example.wanandroid.event;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.wanandroid.base.event.Event;
+
 import java.util.HashMap;
 
 /**

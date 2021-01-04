@@ -8,11 +8,10 @@ import com.example.wanandroid.data.DataRepository;
 
 public class HomeViewModel extends BaseViewModel {
 	// TODO: Implement the ViewModel
-	final DataRepository mDataRepository;
 	
 	@ViewModelInject
 	public HomeViewModel(DataRepository dataRepository) {
-		mDataRepository = dataRepository;
+		super(dataRepository);
 	}
 	
 	public void setCurrentPage(int curfragment) {

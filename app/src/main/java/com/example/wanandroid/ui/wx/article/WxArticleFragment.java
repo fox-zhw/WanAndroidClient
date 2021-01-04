@@ -15,7 +15,7 @@ import com.example.wanandroid.R;
 import com.example.wanandroid.base.fragment.BaseFragment;
 import com.example.wanandroid.base.fragment.BaseRootFragment;
 import com.example.wanandroid.data.bean.wx.WxAuthor;
-import com.example.wanandroid.event.Event;
+import com.example.wanandroid.base.event.Event;
 import com.example.wanandroid.ui.wx.articledetail.WxDetailArticleFragment;
 import com.example.wanandroid.util.CommonUtils;
 

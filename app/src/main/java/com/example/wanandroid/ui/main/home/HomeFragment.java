@@ -71,26 +71,26 @@ public class HomeFragment extends BaseRootFragment {
 		return R.layout.home_fragment;
 	}
 	
-	@Override
-	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.menu_activity_main, menu);
-	}
+//	@Override
+//	public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+//		super.onCreateOptionsMenu(menu, inflater);
+//		inflater.inflate(R.menu.menu_activity_main, menu);
+//	}
 	
-	@Override
-	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.action_usage:
-				// TODO: 2020/12/20 usage
-				break;
-			case R.id.action_search:
-				// TODO: 2020/12/20 search
-				break;
-			default:
-				break;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+//	@Override
+//	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//		switch (item.getItemId()) {
+//			case R.id.action_usage:
+//				// TODO: 2020/12/20 usage
+//				break;
+//			case R.id.action_search:
+//				// TODO: 2020/12/20 search
+//				break;
+//			default:
+//				break;
+//		}
+//		return super.onOptionsItemSelected(item);
+//	}
 	
 	@Override
 	protected void initView() {
@@ -103,18 +103,35 @@ public class HomeFragment extends BaseRootFragment {
 	}
 	
 	protected void initToolbar() {
-		((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
-		ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setDisplayShowTitleEnabled(false);
-		}
+//		((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+//		ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+//		if (actionBar != null) {
+//			actionBar.setDisplayShowTitleEnabled(false);
+//		}
 		mTitleTv.setText(getString(R.string.home_pager));
 		StatusBarUtil.setStatusColor(getActivity().getWindow(), ContextCompat.getColor(getActivity(), R.color.main_status_bar_blue), 1f);
+		mToolbar.inflateMenu(R.menu.menu_activity_main);
 		mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 //				onBackPressedSupport();
 				mDrawerLayout.openDrawer(mNavigationView);
+			}
+		});
+		mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				switch (item.getItemId()) {
+					case R.id.action_usage:
+						// TODO: 2020/12/20 usage
+						break;
+					case R.id.action_search:
+						// TODO: 2020/12/20 search
+						break;
+					default:
+						break;
+				}
+				return true;
 			}
 		});
 	}

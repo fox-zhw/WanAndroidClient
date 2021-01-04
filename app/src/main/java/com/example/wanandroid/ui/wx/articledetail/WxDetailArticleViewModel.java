@@ -9,21 +9,20 @@ import com.example.wanandroid.base.viewmodel.BaseViewModel;
 import com.example.wanandroid.data.DataRepository;
 import com.example.wanandroid.data.bean.main.collect.FeedArticleData;
 import com.example.wanandroid.data.bean.main.collect.FeedArticleListData;
-import com.example.wanandroid.event.Event;
+import com.example.wanandroid.base.event.Event;
 import com.example.wanandroid.rx.BaseObserver;
 import com.example.wanandroid.rx.RxUtils;
 
 public class WxDetailArticleViewModel extends BaseViewModel {
 	public static final String TAG = "WxDetailArticleViewMode";
 	
-	final DataRepository mDataRepository;
 	
 	final MutableLiveData<FeedArticleListData> mFeedArticleListDataLiveData = new MutableLiveData<>();
 	final MutableLiveData<FeedArticleListData> mFeedArticleListDataSearchLiveData = new MutableLiveData<>();
 	
 	@ViewModelInject
 	public WxDetailArticleViewModel(DataRepository dataRepository) {
-		mDataRepository = dataRepository;
+		super(dataRepository);
 	}
 	
 	public void getWxDetailData(int id, int page, boolean isShowError) {

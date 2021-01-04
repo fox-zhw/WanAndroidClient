@@ -75,9 +75,10 @@ public class AbortUsFragment extends BaseRootFragment {
 	
 	@Override
 	protected void initView() {
-		((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
-		StatusBarUtil.immersive(getActivity());
-		StatusBarUtil.setPaddingSmart(getActivity(), mToolbar);
+//		((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+//		StatusBarUtil.immersive(getActivity());
+//		StatusBarUtil.setPaddingSmart(getActivity(), mToolbar);
+//		mToolbar.setTitle("关于");
 		mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -1,4 +1,4 @@
-package com.example.wanandroid.event;
+package com.example.wanandroid.base.event;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

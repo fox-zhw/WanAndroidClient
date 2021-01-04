@@ -9,7 +9,7 @@ import com.example.wanandroid.data.bean.BaseResponse;
 import com.example.wanandroid.data.bean.main.banner.BannerData;
 import com.example.wanandroid.data.bean.main.collect.FeedArticleListData;
 import com.example.wanandroid.data.bean.main.login.LoginData;
-import com.example.wanandroid.event.Event;
+import com.example.wanandroid.base.event.Event;
 
 import java.util.List;
 
@@ -17,7 +17,6 @@ import io.reactivex.Observable;
 
 public class MainPagerViewModel extends BaseViewModel {
 	// TODO: Implement the ViewModel
-	final DataRepository mDataRepository;
 	// 自动登录成功/失败
 	final MutableLiveData<Event<Boolean>> mAutoLoginLiveEvent = new MutableLiveData<>();
 	// 文章列表
@@ -27,8 +26,7 @@ public class MainPagerViewModel extends BaseViewModel {
 	
 	@ViewModelInject
 	public MainPagerViewModel(DataRepository dataRepository) {
-		mDataRepository = dataRepository;
-		
+		super(dataRepository);
 //		Observable<BaseResponse<FeedArticleListData>> mArticleObservable = mDataRepository.getFeedArticleList(0);
 //		Disposable subscribe = mArticleObservable
 //				.subscribeOn(Schedulers.io())
