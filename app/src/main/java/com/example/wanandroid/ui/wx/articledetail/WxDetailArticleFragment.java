@@ -1,5 +1,6 @@
 package com.example.wanandroid.ui.wx.articledetail;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -25,18 +26,25 @@ import com.example.wanandroid.Constants;
 import com.example.wanandroid.R;
 import com.example.wanandroid.base.fragment.BaseFragment;
 import com.example.wanandroid.base.fragment.BaseRootFragment;
+import com.example.wanandroid.data.bean.main.collect.FeedArticleListData;
+import com.example.wanandroid.event.Event;
 import com.example.wanandroid.ui.mainpager.ArticleListAdapter;
 import com.example.wanandroid.util.CommonUtils;
 import com.example.wanandroid.util.LogHelper;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
 
+@AndroidEntryPoint
 public class WxDetailArticleFragment extends BaseRootFragment {
 	public static final String TAG = "WxDetailArticleFragment";
 	@BindView(R.id.normal_view)
@@ -164,7 +172,46 @@ public class WxDetailArticleFragment extends BaseRootFragment {
 			showLoading();
 		}
 		
-		
+		initViewModel();
+	}
+	
+	private void initViewModel() {
+		mViewModel.mFeedArticleListDataLiveData.observe(this, new Observer<FeedArticleListData>() {
+			@Override
+			public void onChanged(FeedArticleListData feedArticleListData) {
+				if (isRefresh) {
+					mAdapter.replaceData(feedArticleListData.getDatas());
+				} else {
+					if (feedArticleListData.getDatas().size() > 0) {
+						mAdapter.addData(feedArticleListData.getDatas());
+					} else {
+						CommonUtils.showMessage(_mActivity, getString(R.string.load_more_no_data));
+					}
+				}
+				showNormal();
+			}
+		});
+		mViewModel.mFeedArticleListDataSearchLiveData.observe(this, new Observer<FeedArticleListData>() {
+			@Override
+			public void onChanged(FeedArticleListData feedArticleListData) {
+				if (isRefresh) {
+					mAdapter.replaceData(feedArticleListData.getDatas());
+				} else {
+					if (feedArticleListData.getDatas().size() > 0) {
+						mAdapter.addData(feedArticleListData.getDatas());
+					} else {
+						CommonUtils.showMessage(_mActivity, getString(R.string.load_more_no_data));
+					}
+				}
+				showNormal();
+			}
+		});
+		mViewModel.mSnackBarMsgEvent.observe(this, new Event.EventObserver<String>() {
+			@Override
+			public void onEventChanged(@NonNull String s) {
+				showSnackBar(s);
+			}
+		});
 	}
 	
 	private void initToolbar() {
@@ -175,25 +222,31 @@ public class WxDetailArticleFragment extends BaseRootFragment {
 	
 	private void setRefresh() {
 		mRefreshLayout.setPrimaryColorsId(Constants.BLUE_THEME, R.color.white);
-		mRefreshLayout.setOnRefreshListener(refreshLayout -> {
-			mCurrentPage = 1;
-			if (id != 0) {
-				isRefresh = true;
-				mViewModel.getWxDetailData(id, 0, false);
-			}
-			refreshLayout.finishRefresh(1000);
-		});
-		mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
-			mCurrentPage++;
-			if (id != 0) {
-				isRefresh = false;
-				if (isSearchStatus) {
-					mViewModel.getWxSearchSumData(id, mCurrentPage, searchString);
-				} else {
-					mViewModel.getWxDetailData(id, mCurrentPage, false);
+		mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+			@Override
+			public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+				mCurrentPage = 1;
+				if (id != 0) {
+					isRefresh = true;
+					mViewModel.getWxDetailData(id, 0, false);
 				}
+				refreshLayout.finishRefresh(1000);
 			}
-			refreshLayout.finishLoadMore(1000);
+		});
+		mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+			@Override
+			public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+				mCurrentPage++;
+				if (id != 0) {
+					isRefresh = false;
+					if (isSearchStatus) {
+						mViewModel.getWxSearchSumData(id, mCurrentPage, searchString);
+					} else {
+						mViewModel.getWxDetailData(id, mCurrentPage, false);
+					}
+				}
+				refreshLayout.finishLoadMore(1000);
+			}
 		});
 	}
 }

@@ -33,7 +33,7 @@ public class WxArticleViewModel extends BaseViewModel {
 		addDisposable(mDataRepository.getWxAuthorListData()
 				.compose(RxUtils.transObservable())
 				.compose(RxUtils.handleResult())
-				.subscribeWith(new BaseObserver<List<WxAuthor>>(){
+				.subscribeWith(new BaseObserver<List<WxAuthor>>() {
 					@Override
 					public void onNext(List<WxAuthor> wxAuthors) {
 						mWxAuthorListLiveData.postValue(wxAuthors);

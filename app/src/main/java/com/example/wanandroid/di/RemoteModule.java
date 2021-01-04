@@ -8,12 +8,16 @@ import com.example.wanandroid.data.remote.api.GeeksApis;
 import com.example.wanandroid.performance.net.OkHttpDns;
 import com.example.wanandroid.performance.net.OkHttpEventListener;
 import com.example.wanandroid.util.CommonUtils;
+import com.example.wanandroid.util.LogHelper;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -74,55 +78,63 @@ public class RemoteModule {
 		// httpDns 优化
 //		builder.dns(OkHttpDns.getIns(context));
 		
-//		File cacheFile = new File(Constants.PATH_CACHE);
-//		Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
-//		Interceptor cacheInterceptor = chain -> {
-//			Request request = chain.request();
-//			if (!CommonUtils.isNetworkConnected()) {
-//				// 无网时强制使用数据缓存，以提升用户体验。
-//				request = request.newBuilder()
-//						.cacheControl(CacheControl.FORCE_CACHE)
-//						.build();
-//			}
-//			Response response = chain.proceed(request);
-//			if (CommonUtils.isNetworkConnected()) {
-//				int maxAge = 0;
-//				// 有网络时, 不缓存, 最大保存时长为0
-//				response.newBuilder()
-//						.header("Cache-Control", "public, max-age=" + maxAge)
-//						.removeHeader("Pragma")
-//						.build();
-//			} else {
-//				// 无网络时，设置超时为4周
-//				int maxStale = 60 * 60 * 24 * 28;
-//				response.newBuilder()
-//						.header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
-//						.removeHeader("Pragma")
-//						.build();
-//			}
-//			return response;
-//		};
+		File cacheFile = new File(Constants.PATH_CACHE);
+		Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
+		Interceptor cacheInterceptor = new Interceptor() {
+			@Override
+			public @NotNull Response intercept(@NotNull Chain chain) throws IOException {
+				Request request = chain.request();
+				if (!CommonUtils.isNetworkConnected()) {
+					// 无网时强制使用数据缓存，以提升用户体验。
+					request = request.newBuilder()
+							.cacheControl(CacheControl.FORCE_CACHE)
+							.build();
+				}
+				Response response = chain.proceed(request);
+				if (CommonUtils.isNetworkConnected()) {
+					int maxAge = 0;
+					// 有网络时, 不缓存, 最大保存时长为0
+					response.newBuilder()
+							.header("Cache-Control", "public, max-age=" + maxAge)
+							.removeHeader("Pragma")
+							.build();
+				} else {
+					// 无网络时，设置超时为4周
+					int maxStale = 60 * 60 * 24 * 28;
+					response.newBuilder()
+							.header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+							.removeHeader("Pragma")
+							.build();
+				}
+				return response;
+			}
+		};
 		
 		// 缓存优化
-//		builder.addNetworkInterceptor(cacheInterceptor);
-//		builder.addInterceptor(cacheInterceptor);
-//		builder.cache(cache);
+		builder.addNetworkInterceptor(cacheInterceptor);
+		builder.addInterceptor(cacheInterceptor);
+		builder.cache(cache);
 		
-//		if (BuildConfig.DEBUG) {
-//			HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-//			loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
-//			builder.addInterceptor(loggingInterceptor);
+		if (BuildConfig.DEBUG) {
+			HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+				@Override
+				public void log(String message) {
+					LogHelper.e(message);
+				}
+			});
+			loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+			builder.addInterceptor(loggingInterceptor);
 //			builder.addNetworkInterceptor(new StethoInterceptor());
-//		}
+		}
 		
 		//设置超时
 		builder.connectTimeout(10, TimeUnit.SECONDS);
 		builder.readTimeout(20, TimeUnit.SECONDS);
 		builder.writeTimeout(20, TimeUnit.SECONDS);
 		//错误重连
-//		builder.retryOnConnectionFailure(true);
+		builder.retryOnConnectionFailure(true);
 		//cookie认证
-//		builder.cookieJar(new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context)));
+		builder.cookieJar(new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context)));
 		
 //		return RetrofitUrlManager.getInstance().with(builder).build();
 		return builder.build();

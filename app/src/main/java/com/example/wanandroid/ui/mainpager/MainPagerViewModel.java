@@ -10,14 +10,10 @@ import com.example.wanandroid.data.bean.main.banner.BannerData;
 import com.example.wanandroid.data.bean.main.collect.FeedArticleListData;
 import com.example.wanandroid.data.bean.main.login.LoginData;
 import com.example.wanandroid.event.Event;
-import com.example.wanandroid.util.LogHelper;
 
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class MainPagerViewModel extends BaseViewModel {
 	// TODO: Implement the ViewModel
@@ -33,15 +29,15 @@ public class MainPagerViewModel extends BaseViewModel {
 	public MainPagerViewModel(DataRepository dataRepository) {
 		mDataRepository = dataRepository;
 		
-		Observable<BaseResponse<FeedArticleListData>> mArticleObservable = mDataRepository.getFeedArticleList(0);
-		Disposable subscribe = mArticleObservable
-				.subscribeOn(Schedulers.io())
-				.subscribe(new Consumer<BaseResponse<FeedArticleListData>>() {
-					@Override
-					public void accept(BaseResponse<FeedArticleListData> feedArticleListDataBaseResponse) throws Exception {
-						LogHelper.e("网络请求成功了");
-					}
-				});
+//		Observable<BaseResponse<FeedArticleListData>> mArticleObservable = mDataRepository.getFeedArticleList(0);
+//		Disposable subscribe = mArticleObservable
+//				.subscribeOn(Schedulers.io())
+//				.subscribe(new Consumer<BaseResponse<FeedArticleListData>>() {
+//					@Override
+//					public void accept(BaseResponse<FeedArticleListData> feedArticleListDataBaseResponse) throws Exception {
+//						LogHelper.e("网络请求成功了");
+//					}
+//				});
 	}
 	
 	public void loadMainPagerData() {

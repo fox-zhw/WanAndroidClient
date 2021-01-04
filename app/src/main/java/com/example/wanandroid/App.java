@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.wanandroid.util.LogHelper;
+import com.facebook.stetho.Stetho;
 
 import dagger.hilt.android.HiltAndroidApp;
 import me.yokeyword.fragmentation.Fragmentation;
