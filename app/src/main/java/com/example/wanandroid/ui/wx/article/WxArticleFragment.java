@@ -6,16 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.library.tablayout.SlidingTabLayout;
 import com.example.wanandroid.Constants;
 import com.example.wanandroid.R;
+import com.example.wanandroid.base.event.Event;
 import com.example.wanandroid.base.fragment.BaseFragment;
 import com.example.wanandroid.base.fragment.BaseRootFragment;
 import com.example.wanandroid.data.bean.wx.WxAuthor;
-import com.example.wanandroid.base.event.Event;
 import com.example.wanandroid.ui.wx.articledetail.WxDetailArticleFragment;
 import com.example.wanandroid.util.CommonUtils;
 

@@ -6,7 +6,6 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MainPagerFragment extends BaseRootFragment {
+	public static final String TAG = "MainPagerFragment";
 	@BindView(R.id.normal_view)
 	SmartRefreshLayout mRefreshLayout;
 	@BindView(R.id.main_pager_recycler_view)

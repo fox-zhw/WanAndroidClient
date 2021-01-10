@@ -1,0 +1,9 @@
+@startuml
+skinparam style strictuml
+
+a->b:同步消息
+
+a->>b:异步消息
+b-->>a:返回消息
+a->a:自关联消息
+@enduml

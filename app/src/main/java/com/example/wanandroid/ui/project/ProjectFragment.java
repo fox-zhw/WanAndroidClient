@@ -1,14 +1,12 @@
 package com.example.wanandroid.ui.project;
 
-import androidx.lifecycle.ViewModelProviders;
-
-import androidx.viewpager.widget.ViewPager;
-
 import android.view.View;
+
+import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.library.tablayout.SlidingTabLayout;
 import com.example.wanandroid.R;
-import com.example.wanandroid.base.fragment.BaseFragment;
 import com.example.wanandroid.base.fragment.BaseRootFragment;
 
 import butterknife.BindView;
