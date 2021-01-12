@@ -8,12 +8,14 @@ import androidx.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.example.wanandroid.Constants;
 import com.example.wanandroid.R;
 import com.example.wanandroid.base.fragment.BaseRootFragment;
 import com.example.wanandroid.base.event.Event;
+import com.example.wanandroid.ui.user.register.RegisterFragment;
 import com.example.wanandroid.util.CommonUtils;
 import com.jakewharton.rxbinding2.view.RxView;
 
@@ -26,8 +28,6 @@ import io.reactivex.functions.Consumer;
 
 @AndroidEntryPoint
 public class LoginFragment extends BaseRootFragment {
-	@BindView(R.id.login_group)
-	RelativeLayout mLoginGroup;
 	@BindView(R.id.login_toolbar)
 	Toolbar mToolbar;
 	@BindView(R.id.login_account_edit)
@@ -55,7 +55,7 @@ public class LoginFragment extends BaseRootFragment {
 		mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				onBackPressedSupport();
+				pop();
 			}
 		});
 	}
@@ -119,6 +119,12 @@ public class LoginFragment extends BaseRootFragment {
 	}
 	
 	private void startRegisterPager() {
-		// TODO: 2021/1/4 注册
+		start(RegisterFragment.newInstance(), SINGLETASK);
+	}
+	
+	@Override
+	public boolean onBackPressedSupport() {
+		hideSoftInput();
+		return super.onBackPressedSupport();
 	}
 }

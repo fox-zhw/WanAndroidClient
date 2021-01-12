@@ -1,5 +1,6 @@
 package com.example.wanandroid.ui.main.home;
 
+import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -19,6 +20,7 @@ import com.example.wanandroid.ui.hierarchy.KnowledgeHierarchyFragment;
 import com.example.wanandroid.ui.mainpager.MainPagerFragment;
 import com.example.wanandroid.ui.navigation.NavigationFragment;
 import com.example.wanandroid.ui.project.ProjectFragment;
+import com.example.wanandroid.ui.user.login.LoginFragment;
 import com.example.wanandroid.ui.wx.article.WxArticleFragment;
 import com.example.wanandroid.util.StatusBarUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -45,6 +47,8 @@ public class HomeFragment extends BaseRootFragment {
 	NavigationView mNavigationView;
 	@BindView(R.id.fragment_group)
 	FrameLayout mFrameGroup;
+	
+	private TextView mUsTv;
 	
 	private HomeViewModel mViewModel;
 	
@@ -162,7 +166,15 @@ public class HomeFragment extends BaseRootFragment {
 	}
 	
 	private void initNavigationView() {
-		mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_login_tv);
+		mUsTv = mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_login_tv);
+		mUsTv.setText(R.string.login_in);
+		mUsTv.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				start(LoginFragment.newInstance(), SINGLETASK);
+			}
+		});
+		
 		
 		mNavigationView.getMenu().findItem(R.id.nav_item_wan_android)
 				.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

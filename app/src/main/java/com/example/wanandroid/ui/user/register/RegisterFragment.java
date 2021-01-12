@@ -1,7 +1,5 @@
 package com.example.wanandroid.ui.user.register;
 
-import android.content.Context;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,8 +19,6 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import dagger.hilt.android.AndroidEntryPoint;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Predicate;
 
 @AndroidEntryPoint
 public class RegisterFragment extends BaseRootFragment {
@@ -65,11 +61,7 @@ public class RegisterFragment extends BaseRootFragment {
 	protected void initEventAndData() {
 		super.initEventAndData();
 		mViewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
-		InputMethodManager inputMethodManager = (InputMethodManager) _mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-		if (inputMethodManager != null) {
-			mAccountEdit.requestFocus();
-			inputMethodManager.showSoftInput(mAccountEdit, 0);
-		}
+		showSoftInput(mAccountEdit);
 		
 		mViewModel.addDisposable(RxView.clicks(mRegisterBtn)
 				.throttleFirst(Constants.CLICK_TIME_AREA, TimeUnit.MILLISECONDS)
@@ -89,4 +81,9 @@ public class RegisterFragment extends BaseRootFragment {
 				mConfirmPasswordEdit.getText().toString().trim());
 	}
 	
+	@Override
+	public boolean onBackPressedSupport() {
+		hideSoftInput();
+		return super.onBackPressedSupport();
+	}
 }
