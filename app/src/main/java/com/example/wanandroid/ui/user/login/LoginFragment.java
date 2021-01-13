@@ -127,4 +127,10 @@ public class LoginFragment extends BaseRootFragment {
 		hideSoftInput();
 		return super.onBackPressedSupport();
 	}
+	
+	@Override
+	public void onDestroyView() {
+		hideSoftInput();
+		super.onDestroyView();
+	}
 }

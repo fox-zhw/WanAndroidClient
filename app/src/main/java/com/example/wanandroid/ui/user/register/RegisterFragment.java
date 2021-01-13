@@ -86,4 +86,10 @@ public class RegisterFragment extends BaseRootFragment {
 		hideSoftInput();
 		return super.onBackPressedSupport();
 	}
+	
+	@Override
+	public void onDestroyView() {
+		hideSoftInput();
+		super.onDestroyView();
+	}
 }
