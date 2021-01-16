@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.wanandroid.R;
 import com.example.wanandroid.base.fragment.BaseRootFragment;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class NavigationFragment extends BaseRootFragment {
 	
 	private NavigationViewModel mViewModel;

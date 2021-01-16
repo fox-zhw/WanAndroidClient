@@ -1,5 +1,6 @@
 package com.example.wanandroid.ui.user.register;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -54,7 +55,10 @@ public class RegisterFragment extends BaseRootFragment {
 		mTitleTv.setText(R.string.register);
 		mTitleTv.setTextColor(ContextCompat.getColor(_mActivity, R.color.white));
 		mTitleTv.setTextSize(20);
-		mToolbar.setNavigationOnClickListener(v -> pop());
+		mToolbar.setNavigationOnClickListener(v -> {
+			pop();
+			hideSoftInput();
+		});
 	}
 	
 	@Override
