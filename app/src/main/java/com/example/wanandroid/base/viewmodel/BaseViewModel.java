@@ -49,7 +49,7 @@ public abstract class BaseViewModel extends ViewModel {
 			Timber.e(e);
 		}
 	}
-
+	
 	public <T> void addDisposable(Completable completable, Action action) {
 		mDisposable.add(completable
 				.compose(RxUtils.transCompletable())

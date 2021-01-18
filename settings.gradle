@@ -1,4 +1,3 @@
-include ':customview'
 include ':library'
 include ':framework'
 include ':app'

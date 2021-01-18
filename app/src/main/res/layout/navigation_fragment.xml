@@ -14,7 +14,7 @@
         android:orientation="horizontal"
         android:visibility="invisible">
 
-        <q.rorbin.verticaltablayout.VerticalTabLayout
+        <com.example.library.verticaltablayout.VerticalTabLayout
             android:id="@+id/navigation_tab_layout"
             android:layout_width="@dimen/dp_100"
             android:layout_height="match_parent"

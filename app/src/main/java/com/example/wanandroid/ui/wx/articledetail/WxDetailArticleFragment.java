@@ -104,6 +104,9 @@ public class WxDetailArticleFragment extends BaseRootFragment {
 		mRecyclerView.setLayoutManager(new LinearLayoutManager(_mActivity));
 		mRecyclerView.setHasFixedSize(true);
 		mRecyclerView.setAdapter(mAdapter);
+		if (CommonUtils.isNetworkConnected()) {
+			showLoading();
+		}
 	}
 	
 	@Override
