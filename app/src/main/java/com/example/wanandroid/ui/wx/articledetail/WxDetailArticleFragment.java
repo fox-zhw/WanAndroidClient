@@ -104,25 +104,9 @@ public class WxDetailArticleFragment extends BaseRootFragment {
 		mRecyclerView.setLayoutManager(new LinearLayoutManager(_mActivity));
 		mRecyclerView.setHasFixedSize(true);
 		mRecyclerView.setAdapter(mAdapter);
-		if (CommonUtils.isNetworkConnected()) {
-			showLoading();
-		}
-	}
-	
-	@Override
-	protected void initEventAndData() {
-		super.initEventAndData();
-		mViewModel = ViewModelProviders.of(this).get(WxDetailArticleViewModel.class);
 		isSearchStatus = false;
 		setRefresh();
-		Bundle bundle = getArguments();
-		id = bundle.getInt(Constants.ARG_PARAM1, 0);
-		if (id == 0) {
-			return;
-		}
-		mAuthor = bundle.getString(Constants.ARG_PARAM2, "");
 		initToolbar();
-		
 		mSearchEdit.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -143,6 +127,22 @@ public class WxDetailArticleFragment extends BaseRootFragment {
 				}
 			}
 		});
+		if (CommonUtils.isNetworkConnected()) {
+			showLoading();
+		}
+	}
+	
+	@Override
+	protected void initEventAndData() {
+		super.initEventAndData();
+		mViewModel = ViewModelProviders.of(this).get(WxDetailArticleViewModel.class);
+		
+		Bundle bundle = getArguments();
+		id = bundle.getInt(Constants.ARG_PARAM1, 0);
+		if (id == 0) {
+			return;
+		}
+		mAuthor = bundle.getString(Constants.ARG_PARAM2, "");
 		
 		mViewModel.addDisposable(RxView.clicks(mSearchTv)
 				.throttleFirst(Constants.CLICK_TIME_AREA, TimeUnit.MILLISECONDS)

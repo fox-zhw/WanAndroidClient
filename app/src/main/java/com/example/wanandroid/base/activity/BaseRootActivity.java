@@ -64,7 +64,7 @@ public abstract class BaseRootActivity extends SupportActivity {
 		} else {
 			long currentTime = System.currentTimeMillis();
 			if ((currentTime - clickTime) > Constants.DOUBLE_INTERVAL_TIME) {
-				CommonUtils.showSnackMessage(this, getString(R.string.double_click_exit_tint));
+				CommonUtils.showMessage(this, getString(R.string.double_click_exit_tint));
 				clickTime = System.currentTimeMillis();
 			} else {
 				ActivityCompat.finishAfterTransition(this);
