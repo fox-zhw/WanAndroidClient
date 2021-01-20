@@ -1,4 +1,4 @@
-package com.example.wanandroid.ui.hierarchy;
+package com.example.wanandroid.ui.hierarchy.list;
 
 import androidx.lifecycle.ViewModelProviders;
 

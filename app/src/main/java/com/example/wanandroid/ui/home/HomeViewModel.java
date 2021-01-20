@@ -1,7 +1,6 @@
-package com.example.wanandroid.ui.main.home;
+package com.example.wanandroid.ui.home;
 
 import androidx.hilt.lifecycle.ViewModelInject;
-import androidx.lifecycle.ViewModel;
 
 import com.example.wanandroid.base.viewmodel.BaseViewModel;
 import com.example.wanandroid.data.DataRepository;

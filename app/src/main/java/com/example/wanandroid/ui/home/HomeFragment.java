@@ -1,6 +1,5 @@
-package com.example.wanandroid.ui.main.home;
+package com.example.wanandroid.ui.home;
 
-import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -16,7 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.wanandroid.R;
 import com.example.wanandroid.base.fragment.BaseRootFragment;
 import com.example.wanandroid.ui.abort.AbortUsFragment;
-import com.example.wanandroid.ui.hierarchy.KnowledgeHierarchyFragment;
+import com.example.wanandroid.ui.hierarchy.main.KnowledgeHierarchyFragment;
 import com.example.wanandroid.ui.mainpager.MainPagerFragment;
 import com.example.wanandroid.ui.navigation.NavigationFragment;
 import com.example.wanandroid.ui.project.ProjectFragment;

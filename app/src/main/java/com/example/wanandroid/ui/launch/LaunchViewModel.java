@@ -1,4 +1,4 @@
-package com.example.wanandroid.ui.main.launch;
+package com.example.wanandroid.ui.launch;
 
 import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.MutableLiveData;

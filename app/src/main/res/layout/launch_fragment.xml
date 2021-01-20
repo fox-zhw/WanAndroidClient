@@ -7,7 +7,7 @@
     android:background="@mipmap/icon_wan_android"
     android:orientation="vertical"
     tools:layout_editor_absoluteY="@dimen/dp_25"
-    tools:context=".ui.main.launch.LaunchFragment">
+    tools:context=".ui.launch.LaunchFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/one_animation"

@@ -1,4 +1,4 @@
-package com.example.wanandroid.ui.main.launch;
+package com.example.wanandroid.ui.launch;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -8,7 +8,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.wanandroid.R;
 import com.example.wanandroid.base.fragment.BaseRootFragment;
 import com.example.wanandroid.base.event.Event;
-import com.example.wanandroid.ui.main.home.HomeFragment;
+import com.example.wanandroid.ui.home.HomeFragment;
 import com.example.wanandroid.util.StatusBarUtil;
 
 import java.util.List;

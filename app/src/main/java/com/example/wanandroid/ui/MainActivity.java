@@ -3,8 +3,8 @@ package com.example.wanandroid.ui;
 import com.example.wanandroid.App;
 import com.example.wanandroid.R;
 import com.example.wanandroid.base.activity.BaseRootActivity;
-import com.example.wanandroid.ui.main.home.HomeFragment;
-import com.example.wanandroid.ui.main.launch.LaunchFragment;
+import com.example.wanandroid.ui.home.HomeFragment;
+import com.example.wanandroid.ui.launch.LaunchFragment;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
